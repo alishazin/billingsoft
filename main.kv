@@ -1,0 +1,2771 @@
+#:import utils kivy.utils
+
+<RecycleListItemBackup>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 5
+    spacing: 4
+    _height: 80
+
+    MDRelativeLayout:
+        size_hint: 1,1
+
+        MDLabel:
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .8}
+            halign: 'left'
+            font_size: 15
+            text: root.text
+            valign: 'center'
+
+        MDLabel:
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .5}
+            halign: 'left'
+            font_size: 14
+            text: root.sec_text
+            valign: 'center'
+            theme_text_color: 'Secondary'
+
+        MDLabel:
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .2}
+            halign: 'left'
+            font_size: 13
+            text: root.ter_text
+            valign: 'center'
+            theme_text_color: 'Hint'
+
+<RVBackup>:
+    viewclass: 'RecycleListItemBackup'
+    RecycleBoxLayout:
+        default_size: None, 80
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<ModalPopularDay>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .5,.2
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Show Grid '
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .5}
+
+        MDCheckbox:
+            id: grid
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .25, 'center_y': .5}
+
+        FocusMDRaisedButton:
+            text: 'Plot'
+            pos_hint: {'x': .7, 'center_y': .3}
+            on_release: app.popular_day(grid)
+
+<ModalPopularTime>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .5,.2
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Show Grid '
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .5}
+
+        MDCheckbox:
+            id: grid
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .25, 'center_y': .5}
+
+        FocusMDRaisedButton:
+            text: 'Plot'
+            pos_hint: {'x': .7, 'center_y': .3}
+            on_release: app.popular_time(grid)
+
+
+<RecycleListItemPricedetails>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 5
+    on_release: app.product_price(inp2.text[12::],inp.text)
+    ripple_behavior: True
+
+    MDLabel:
+        id: inp
+        size_hint: .7,1
+        halign: 'left'
+        font_size: 15
+        text: root.name
+        valign: 'center'
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+    MDLabel:
+        id: inp2
+        size_hint: .3,1
+        halign: 'left'
+        font_size: 15
+        text: root.code
+        valign: 'center'
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+<RVPriceDetails>:
+    viewclass: 'RecycleListItemPricedetails'
+    RecycleBoxLayout:
+        default_size: None, 40
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<ModalPriceDetails>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .8,.9
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        TextInput:
+            id: textinput
+            hint_text: 'Search in Products'
+            size_hint: .9,.06
+            pos_hint: {'center_x': .48,'center_y': .9}
+            on_text: app.search_price_details_screen(self,self.text)
+
+        FocusMDIconButton:
+            icon: 'close'
+            pos_hint: {'center_x': .96,'center_y': .9}
+            on_release: textinput.text = ''
+
+        MDDropDownItem:
+            id: drop_item_sort
+            pos_hint: {'center_x': .12,'center_y': .83}
+            text: 'Search in'
+            on_release: app.open_drop_down_price_details(self)
+            theme_text_color: 'Custom'
+            text_color: 1,0,0,1
+            
+        MDLabel:
+            id: sort_label_price_details
+            text: 'Products'
+            size_hint_x: .2
+            size_hint_y: .05
+            pos_hint: {'center_x': .32, 'center_y': .83}
+
+        MDLabel:
+            id: show_more_lab
+            text: 'Show More'
+            size_hint_x: .2
+            size_hint_y: .05
+            color: 1,0,0,1
+            pos_hint: {'center_x': .85, 'center_y': .83}
+
+        FocusMDCheckbox:
+            id: show_more_check
+            size_hint: None, None
+            size: 48, 48
+            pos_hint: {'center_x': .9, 'center_y': .83}
+            on_active: app.checkbox_active_show_more_price_details(*args)
+
+        ScrollView:
+            size_hint: .95,.74
+            pos_hint: {'center_x': .5,'center_y': .4}
+
+            RVPriceDetails:
+                id: rv
+                scroll_type: ['bars']
+                smooth_scroll_end: 20
+                bar_width: 7
+
+
+<ModalEarnedProduct>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .5,.3
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Value On X-Axis :'
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .8}
+
+        MDLabel:
+            text: 'Name'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .1,'center_y': .6}
+
+        MDCheckbox:
+            id: x_axis_name
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: False
+            pos_hint: {'x': .22, 'center_y': .6}
+
+        MDLabel:
+            text: 'Item Code'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .4,'center_y': .6}
+
+        MDCheckbox:
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .6, 'center_y': .6}
+
+        MDLabel:
+            text: 'Show Grid '
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .3}
+
+        MDCheckbox:
+            id: grid
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .22, 'center_y': .3}
+
+        FocusMDRaisedButton:
+            text: 'Plot'
+            pos_hint: {'x': .7, 'center_y': .2}
+            on_release: app.earned_product(x_axis_name,grid)
+
+<ModalSoldProduct>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .5,.3
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Value On X-Axis :'
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .8}
+
+        MDLabel:
+            text: 'Name'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .1,'center_y': .6}
+
+        MDCheckbox:
+            id: x_axis_name
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: False
+            pos_hint: {'x': .22, 'center_y': .6}
+
+        MDLabel:
+            text: 'Item Code'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .4,'center_y': .6}
+
+        MDCheckbox:
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .6, 'center_y': .6}
+
+        MDLabel:
+            text: 'Show Grid '
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .3}
+
+        MDCheckbox:
+            id: grid
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .22, 'center_y': .3}
+
+        FocusMDRaisedButton:
+            text: 'Plot'
+            pos_hint: {'x': .7, 'center_y': .2}
+            on_release: app.sold_product(x_axis_name,grid)
+
+<ModalCusVisit>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .6,.3
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Value On X-Axis :'
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .8}
+
+        MDLabel:
+            text: 'Name'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .1,'center_y': .6}
+
+        MDCheckbox:
+            id: x_axis_name
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: False
+            pos_hint: {'x': .22, 'center_y': .6}
+
+        MDLabel:
+            id: x_axis_con
+            text: 'Contact No'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .4,'center_y': .6}
+
+        MDCheckbox:
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .6, 'center_y': .6}
+
+        MDLabel:
+            text: 'Show Grid '
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .2}
+
+        MDCheckbox:
+            id: grid
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .2, 'center_y': .2}
+
+        FocusMDRaisedButton:
+            text: 'Plot'
+            pos_hint: {'x': .7, 'center_y': .2}
+            on_release: app.cus_visit(x_axis_name,grid)
+
+
+<ModalMoneySpend>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .6,.3
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Value On X-Axis :'
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .8}
+
+        MDLabel:
+            text: 'Name'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .1,'center_y': .6}
+
+        MDCheckbox:
+            id: x_axis_name
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: False
+            pos_hint: {'x': .22, 'center_y': .6}
+
+        MDLabel:
+            id: x_axis_con
+            text: 'Contact No'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x': .4,'center_y': .6}
+
+        MDCheckbox:
+            group: 'x-axis'
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .6, 'center_y': .6}
+
+        MDLabel:
+            text: 'Show Grid '
+            halign: 'left'
+            size_hint: 1,.05
+            pos_hint: {'x': .05,'center_y': .2}
+
+        MDCheckbox:
+            id: grid
+            size_hint: None, None
+            size: 48, 48
+            active: True
+            pos_hint: {'x': .2, 'center_y': .2}
+
+        FocusMDRaisedButton:
+            text: 'Plot'
+            pos_hint: {'x': .7, 'center_y': .2}
+            on_release: app.cus_money_spend(x_axis_name,grid)
+
+<LoadingView>:
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,1
+    size_hint: .3,.25
+    pos_hint: {'center_x': .55, 'center_y': .5}
+
+    MDRelativeLayout:
+        padding: 5
+
+        MDSpinner:
+            size_hint: None, None
+            size: 40,40
+            pos_hint: {'center_x': .5, 'center_y': .6}
+
+        MDLabel:
+            text: "This window won't respond until you close the graph"
+            halign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': .2}
+
+<FullScreenBillReview>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .8,.85
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Bill View'
+            bold: True
+            font_size: 20
+            size_hint: .6,.05
+            halign: 'left'
+            pos_hint: {'x': .05,'center_y': .95}
+
+        MDSeparator:
+            size_hint: 1,.008
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {'center_x': .5,'center_y': .89}
+
+        MDLabel:
+            text: root.text1
+            size_hint: .9,.05
+            pos_hint: {'center_x': .5,'center_y': .85}
+            halign: 'left'
+
+        MDLabel:
+            text: root.text2
+            size_hint: .45,.05
+            pos_hint: {'center_x': .275,'center_y': .8}
+            halign: 'left'
+
+        MDLabel:
+            text: root.text3
+            size_hint: .45,.05
+            pos_hint: {'center_x': .9,'center_y': .8}
+            halign: 'left'
+
+        MDGridLayout:
+            id: bill_title
+            cols: 3
+            size_hint: .95,.06
+            pos_hint: {'center_x':.5,'center_y': .72}
+            md_bg_color: 0,0,0,.5
+
+            MDLabel:
+                text: '  Product Name'
+                halign: 'left'
+                size_hint: .7,.08
+                color: 1,1,1,1
+
+            MDLabel:
+                text: ' Quantity'
+                halign: 'left'
+                size_hint: .2,.08
+                color: 1,1,1,1
+
+            MDLabel:
+                text: '  Price'
+                halign: 'left'
+                color: 1,1,1,1
+                size_hint: .2,.08
+        
+        ScrollView:
+            id: scr_bill_view_full
+            size_hint: .95,.585
+            pos_hint: {'center_x':.5,'center_y': .392}
+            scroll_type: ['bars']
+            bar_width: 7
+            smooth_scroll_end: 10
+
+            MDGridLayout:
+                cols: 3
+                adaptive_height: True
+
+                MDList:
+                    id: bill_pro
+                    size_hint: .7,None
+
+                MDList:
+                    id: bill_qty
+                    size_hint: .2,None
+
+                MDList:
+                    id: bill_price
+                    size_hint: .2,None
+
+<RecycleListItemBillDetails>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 5
+    spacing: 4
+    _height: 140
+
+    MDRelativeLayout:
+        size_hint: 1,1
+
+        MDLabel:
+            id: bill_no
+            markup: True
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .8}
+            halign: 'left'
+            font_size: 15
+            text: root.name
+            valign: 'center'
+
+        MDLabel:
+            id: con_no
+            markup: True
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .6}
+            halign: 'left'
+            font_size: 14
+            text: root.phno
+            valign: 'center'
+
+        MDLabel:
+            id: time_date
+            markup: True
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .4}
+            halign: 'left'
+            font_size: 14
+            text: root.timedate
+            valign: 'center'
+
+        MDLabel:
+            id: total_no
+            markup: True
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .2}
+            halign: 'left'
+            font_size: 14
+            text: root.total
+            valign: 'center'
+
+        MDIconButton:
+            icon: 'more'
+            pos_hint: {"x": .85, "center_y": .5}
+            on_release: app.regenerate_existing_bill(bill_no.text,con_no.text)
+
+<RVbilldetails>:
+    viewclass: 'RecycleListItemBillDetails'
+    RecycleBoxLayout:
+        default_size: None, 120
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<LocationDetails>:
+    id: popup_screen
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .8,.3
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup_screen.dismiss()
+        
+        MDLabel:
+            text: 'Location Details'
+            bold: True
+            font_size: 18
+            size_hint: .6,.05
+            halign: 'left'
+            pos_hint: {'x': .05,'center_y': .9}
+
+        MDSeparator:
+            id: design_sep
+            size_hint: 1,.008
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {'center_x': .5,'center_y': .8}
+
+        MDLabel:
+            text: root.name
+            font_size: 16
+            size_hint: .5,.05
+            halign: 'left'
+            shorten: True
+            shorten_from: 'right'
+            pos_hint: {'x':.05,'center_y': .68}
+
+        MDLabel:
+            id: inpcon
+            text: root.phno
+            font_size: 16
+            size_hint: .45,.05
+            halign: 'right'
+            pos_hint: {'x':.5,'center_y': .68}
+
+        TextInput:
+            id: inploc
+            text: root.loc
+            hint_text: 'Location'
+            on_focus: app.on_focus_loc_edit_cus(*args,design_sep)
+            size_hint: .8,.18
+            pos_hint: {'center_x':.5,'center_y': .43}
+            on_text: app.filter_caps(self.text,self)
+
+        MDRectangleFlatButton:
+            text: 'Reset'
+            pos_hint: {'center_x':.67,'center_y': .18}
+            on_release: inploc.text = app.reset
+        
+        FocusMDRaisedButton:
+            text: 'Confirm'
+            pos_hint: {'center_x':.83,'center_y': .18}
+            on_release: app.change_location(inploc.text,inpcon.text)
+
+<RecycleListItemcus>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 5
+    spacing: 4
+    _height: 80
+
+    MDRelativeLayout:
+        size_hint: 1,1
+
+        MDLabel:
+            id: inp
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .7}
+            halign: 'left'
+            font_size: 15
+            text: root.name
+            valign: 'center'
+
+        MDLabel:
+            id: inp2
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .3}
+            halign: 'left'
+            font_size: 14
+            text: root.phno
+            valign: 'center'
+            theme_text_color: 'Secondary'
+
+        MDIconButton:
+            icon: 'map-marker'
+            pos_hint: {"x": .85, "center_y": .5}
+            on_release: app.location_show_cus(inp2.text,inp.text)
+
+<RVcus>:
+    viewclass: 'RecycleListItemcus'
+    RecycleBoxLayout:
+        default_size: None, 80
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<CustomSnackbar>:
+
+    MDIconButton:
+        pos_hint: {'center_y': .5}
+        icon: root.icon
+        opposite_colors: True
+
+    MDLabel:
+        id: text_bar
+        size_hint_y: None
+        height: self.texture_size[1]
+        text: root.text
+        font_size: 15
+        theme_text_color: 'Custom'
+        text_color: get_color_from_hex('ffffff')
+        shorten: True
+        shorten_from: 'right'
+        pos_hint: {'center_y': .5}
+
+<RecycleListItemdb>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 5
+    spacing: 4
+    _height: 80
+
+    MDRelativeLayout:
+        size_hint: 1,1
+
+        MDLabel:
+            id: inp
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .8}
+            halign: 'left'
+            font_size: 15
+            text: root.text
+            valign: 'center'
+
+        MDLabel:
+            id: inp2
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .5}
+            halign: 'left'
+            font_size: 14
+            text: root.sec_text
+            valign: 'center'
+            theme_text_color: 'Secondary'
+
+        MDLabel:
+            id: inp3
+            size_hint: .7,.3
+            pos_hint: {"x": .05, "center_y": .2}
+            halign: 'left'
+            font_size: 13
+            text: root.ter_text
+            valign: 'center'
+            theme_text_color: 'Hint'
+
+        MDIconButton:
+            icon: 'pencil'
+            on_release: app.edit_from_db_pro(inp.text)
+            pos_hint: {"x": .8, "center_y": .5}
+
+        MDIconButton:
+            icon: 'delete'
+            on_release: app.delete_from_db_conf(inp.text)
+            pos_hint: {"x": .9, "center_y": .5}
+
+<RVdb>:
+    viewclass: 'RecycleListItemdb'
+    RecycleBoxLayout:
+        default_size: None, 80
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<RV3>:
+    viewclass: 'RecycleListItem3'
+    RecycleBoxLayout:
+        default_size: None, 40
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<RecycleListItem3>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 5
+    on_release: app.fill_cus_contactno_search_result(inp.text)
+
+    MDLabel:
+        id: inp
+        size_hint: 1,1
+        halign: 'left'
+        font_size: 12
+        text: root.text
+        valign: 'center'
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+<CusContactnoSearch>:
+    pos_hint: {'center_x': .73,'center_y': .77}
+    size_hint: .01,.01
+    md_bg_color: 1,1,1,1
+
+    ScrollView:
+        scroll_type: ['bars']
+        size_hint: 1,1 
+        pos_hint: {'center_x': .5,'center_y': .5}
+
+        RV3:
+            scroll_type: ['bars']
+            id: rv3
+
+<RecycleListItem>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 10
+    on_release: app.fill_proname_bill_from_search(inp.text)
+
+    MDLabel:
+        id: inp
+        size_hint: 1,1
+        halign: 'left'
+        font_size: 15
+        text: root.text
+        valign: 'center'
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+<CusDetailsSearch>:
+    pos_hint: {'center_x': .27,'center_y': .77}
+    size_hint: .01,.01
+    md_bg_color: 1,1,1,1
+
+    ScrollView:
+        scroll_type: ['bars']
+        size_hint: 1,1 
+        pos_hint: {'center_x': .5,'center_y': .5}
+
+        RV2:
+            scroll_type: ['bars']
+            id: rv2
+
+<RecycleListItem2>:
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: 1,None
+    elevation: 5
+    on_release: app.fill_cus_name_search_result(inp.text)
+
+    MDLabel:
+        id: inp
+        size_hint: 1,1
+        halign: 'left'
+        font_size: 12
+        text: root.text
+        valign: 'center'
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+<RV2>:
+    viewclass: 'RecycleListItem2'
+    RecycleBoxLayout:
+        default_size: None, 40
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<FullScreenBillView>:
+    id: popup
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            radius: [20]
+            size: self.size
+            pos: self.pos
+    auto_dismiss: False
+    background: ''
+    background_color: 1,1,1,0
+    size_hint: .8,.85
+    pos_hint: {'center_x': .5, 'center_y': .5}
+
+    MDRelativeLayout:
+
+        BillCloseButton:
+            size: 50,50
+            size_hint: None,None
+            pos_hint: {'center_x':.9,'center_y': 1}
+            md_bg_color: app.theme_cls.primary_color
+            radius: [40]
+            elevation: 10
+
+            MDIconButton:
+                icon: 'close'
+                pos_hint: {'center_x': .5,'center_y': .5}
+                user_font_size: 25
+                on_press: self.user_font_size = 20
+                on_release: 
+                    self.user_font_size = 25
+                    popup.dismiss()
+
+        MDLabel:
+            text: 'Bill View'
+            bold: True
+            font_size: 20
+            size_hint: .6,.05
+            halign: 'left'
+            pos_hint: {'x': .05,'center_y': .95}
+
+        MDSeparator:
+            size_hint: 1,.008
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {'center_x': .5,'center_y': .89}
+
+        MDLabel:
+            text: root.text1
+            size_hint: .9,.05
+            pos_hint: {'center_x': .5,'center_y': .85}
+            halign: 'left'
+
+        MDLabel:
+            text: root.text2
+            size_hint: .45,.05
+            pos_hint: {'center_x': .275,'center_y': .8}
+            halign: 'left'
+
+        MDLabel:
+            text: root.text3
+            size_hint: .45,.05
+            pos_hint: {'center_x': .9,'center_y': .8}
+            halign: 'left'
+
+        MDGridLayout:
+            id: bill_title
+            cols: 3
+            size_hint: .95,.06
+            pos_hint: {'center_x':.5,'center_y': .72}
+            md_bg_color: 0,0,0,.5
+
+            MDLabel:
+                text: '  Product Name'
+                halign: 'left'
+                size_hint: .7,.08
+                color: 1,1,1,1
+
+            MDLabel:
+                text: ' Quantity'
+                halign: 'left'
+                size_hint: .2,.08
+                color: 1,1,1,1
+
+            MDLabel:
+                text: '  Price'
+                halign: 'left'
+                color: 1,1,1,1
+                size_hint: .2,.08
+        
+        ScrollView:
+            id: scr_bill_view_full
+            size_hint: .95,.585
+            pos_hint: {'center_x':.5,'center_y': .392}
+            scroll_type: ['bars']
+            bar_width: 7
+            smooth_scroll_end: 10
+
+            MDGridLayout:
+                cols: 3
+                adaptive_height: True
+
+                MDList:
+                    id: bill_pro
+                    size_hint: .7,None
+
+                MDList:
+                    id: bill_qty
+                    size_hint: .2,None
+
+                MDList:
+                    id: bill_price
+                    size_hint: .2,None
+
+        FocusMDRaisedButton:
+            id: add_db_butt
+            text: 'Add to db'
+            pos_hint: {'center_x':.7,'center_y': .045}
+            on_release: 
+                app.add_to_db()
+                anim_butt.start_anim()
+                self.disabled = True
+
+        AnimMDIconIconButton:
+            id: anim_butt
+            icon: 'database-outline'
+            user_font_size: 30
+            pos_hint: {'center_x':.9,'center_y': .045}
+
+<RV>:
+    viewclass: 'RecycleListItem'
+    RecycleBoxLayout:
+        default_size: None, 40
+        default_size_hint: 1, None
+        size_hint_y: None
+        spacing: 2
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<ProNameListItem>:
+    id: list_item1
+    height: 30
+    size_hint: 1,None
+
+    MDBoxLayout:
+        size_hint: 1,1
+
+        ArrowSensitiveTextInput:
+            id: inp
+            text: root.text
+            size_hint: 1,1
+            multiline: False
+            c: 0
+            halign: 'left'
+            r: root.row
+            text_color: 1,0,0,1
+            on_text: app.caps_search_pro_bill(self.text,self)
+            focus: root.focus_
+            on_focus: app.on_focus_proname_list_item(*args)
+            on_text_validate: app.from_pro_to_qty(self)
+    
+<QtyListItem>:
+    id: list_item2
+    height: 30
+    size_hint: 1,None
+
+    MDBoxLayout:
+        size_hint: 1,1
+
+        ArrowSensitiveTextInput:
+            id: inp
+            text: root.text
+            size_hint: 1,1
+            pos: list_item2.pos
+            a: 0
+            c: 1
+            r: root.row
+            multiline: False
+            focus: root.focus_
+            input_filter: 'float'
+            on_focus: if self.focus: app.empty_rv()
+            on_text_validate: app.from_qty_to_pro(self)
+
+<SpinnerModalShort>:
+
+    MDRelativeLayout:
+
+        MDSpinner:
+            size_hint: None, None
+            size: 30,30
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+
+<SpinnerModal>:
+
+    MDRelativeLayout:
+
+        MDSpinner:
+            size_hint: None, None
+            size: 30,30
+            pos_hint: {'center_x': .5, 'center_y': .65}
+            palette: 
+                [0.28627450980392155, 0.8431372549019608, 0.596078431372549, 1], \
+                [0.3568627450980392, 0.3215686274509804, 0.8666666666666667, 1], \
+                [0.8862745098039215, 0.36470588235294116, 0.592156862745098, 1], \
+                [0.8784313725490196, 0.9058823529411765, 0.40784313725490196, 1]
+
+        MDLabel:
+            text: 'Restart the application'
+            size_hint_y: .1
+            size_hint_x: 1
+            halign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': .25}
+            font_size: 14
+
+<ClickableTextFieldRound>:
+    size_hint_y: None
+    height: text_field.height
+
+    MDTextFieldRound:
+        id: text_field
+        hint_text: root.hint_text
+        text: root.text
+        password: True
+        normal_color: 1,1,1,.5
+        color_active: 1,1,1,1
+        line_color: app.theme_cls.primary_color
+        on_text_validate: app.log_in(app.screen.ids.username.text,self.text)
+        icon_left: "key-variant"
+
+    MDIconButton:
+        icon: "eye-off"
+        ripple_scale: .5
+        pos_hint: {"center_y": .5}
+        pos: text_field.width - self.width + 15, 0
+        on_release:
+            self.icon = "eye-off" if self.icon == "eye" else "eye"
+            text_field.password = True if text_field.password == False else False
+
+MDBoxLayout:
+
+    LeftLayout:
+        id: nav_rail
+        orientation: 'vertical'
+        elevation: 5
+        size_hint: None,1
+        width: 60
+        md_bg_color: app.theme_cls.primary_color
+
+        LeftLayoutItem:
+            id: left_bill
+            icon: 'grid'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .93}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'billing screen')
+
+        LeftLayoutItem:
+            id: left_add_db
+            icon: 'database-plus-outline'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .83}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'db-add screen')
+
+        LeftLayoutItem:
+            id: left_db
+            icon: 'database-edit-outline'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .73}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'db screen')
+
+        LeftLayoutItem:
+            id: leftcusdetails
+            icon: 'account-edit-outline'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .63}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'customer info screen')
+
+        LeftLayoutItem:
+            id: left_bill_details
+            icon: 'clock-outline'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .53}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'bill details screen')
+
+        LeftLayoutItem:
+            id: left_graph
+            icon: 'chart-line'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .43}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'graph_screen')
+
+        LeftLayoutItem:
+            id: left_settings
+            icon: 'delete-restore'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .33}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'bin screen')
+
+        LeftLayoutItem:
+            id: left_settings
+            icon: 'lock-outline'
+            user_font_size: 25 
+            pos_hint: {'center_x': .5, 'center_y': .23}
+            on_release: 
+                app.empty_rv()
+                app.left_layout_press(nav_rail,self,'security screen')
+
+
+    ScreenManager:
+        id: screen_manager
+
+        Screen:
+            name: 'sign up screen'
+
+            Image:
+                source: 'img.png'
+                pos_hint: {'center_x': .5,'center_y': .5}
+
+            LoginCard:
+                size_hint: .5,.7
+                pos_hint: {'center_x': .5,'center_y': .5}
+                opacity: .5
+                elevation: 10
+                
+                MDRelativeLayout:
+
+                    MDLabel:
+                        text: '[b]Set Up Security[/b]'
+                        markup: True
+                        size_hint_y: .1
+                        size_hint_x: 1
+                        halign: 'center'
+                        opacity: 1.8
+                        pos_hint: {'center_x': .5, 'center_y': .88}
+                        font_size: 28
+
+                    MDTextFieldRound:
+                        id: username_
+                        size_hint_x: .6
+                        pos_hint: {'center_x': .5, 'center_y': .7}
+                        icon_left: 'account'
+                        normal_color: 1,1,1,.5
+                        color_active: 1,1,1,1
+                        line_color: app.theme_cls.primary_color
+                        on_text_validate: password_.focus = True
+                        hint_text: 'username'
+                        multiline: False
+                        opacity: 1.2
+
+                    MDTextFieldRound:
+                        id: password_
+                        size_hint_x: .6
+                        pos_hint: {'center_x': .5, 'center_y': .55}
+                        icon_left: 'key-variant'
+                        normal_color: 1,1,1,.5
+                        color_active: 1,1,1,1
+                        password: True
+                        multiline: False
+                        on_text_validate: confirm_password_.focus = True
+                        line_color: app.theme_cls.primary_color
+                        hint_text: 'password'
+                        opacity: 1.2
+
+                    MDTextFieldRound:
+                        id: confirm_password_
+                        size_hint_x: .6
+                        pos_hint: {'center_x': .5, 'center_y': .4}
+                        icon_left: 'key-variant'
+                        normal_color: 1,1,1,.5
+                        color_active: 1,1,1,1
+                        multiline: False
+                        line_color: app.theme_cls.primary_color
+                        on_text_validate: app.sign_up_(username_.text,password_.text,self.text)
+                        hint_text: 'confirm password'
+                        password: True
+                        opacity: 1.2
+
+                    FocusMDFillRoundFlatButton:
+                        text: 'Sign Up'
+                        pos_hint: {'center_x': .5, 'center_y': .2}
+                        opacity: 1.5
+                        on_release: app.sign_up_(username_.text,password_.text,confirm_password_.text)
+
+                    MDLabel:
+                        id: errors_pass
+                        text: ''
+                        markup: True
+                        size_hint_y: .1
+                        size_hint_x: 1
+                        halign: 'center'
+                        color: 1,0,0,1
+                        opacity: 1.5
+                        pos_hint: {'center_x': .5, 'center_y': .1}
+                        font_size: 12
+
+        Screen:
+            name: 'log in screen'
+
+            Image:
+                source: 'img.png'
+                pos_hint: {'center_x': .5,'center_y': .5}
+
+            LoginCard:
+                size_hint: .5,.7
+                pos_hint: {'center_x': .5,'center_y': .5}
+                opacity: .5
+                elevation: 10
+                
+                MDRelativeLayout:
+
+                    MDLabel:
+                        text: '[b]Verification[/b]'
+                        markup: True
+                        size_hint_y: .1
+                        size_hint_x: 1
+                        halign: 'center'
+                        opacity: 1.8
+                        pos_hint: {'center_x': .5, 'center_y': .8}
+                        font_size: 28
+
+                    MDTextFieldRound:
+                        id: username
+                        size_hint_x: .6
+                        pos_hint: {'center_x': .5, 'center_y': .6}
+                        icon_left: 'account'
+                        normal_color: 1,1,1,.5
+                        color_active: 1,1,1,1
+                        line_color: app.theme_cls.primary_color
+                        hint_text: 'username'
+                        multiline: False
+                        on_text_validate: password.ids.text_field.focus = True
+                        opacity: 1.2
+
+                    ClickableTextFieldRound:
+                        id: password
+                        size_hint_x: .6
+                        pos_hint: {'center_x': .5, 'center_y': .45}
+                        icon_left: 'key-variant'
+                        normal_color: 1,1,1,.5
+                        color_active: 1,1,1,1
+                        password: True
+                        line_color: app.theme_cls.primary_color
+                        hint_text: 'password'
+                        multiline: False
+                        opacity: 1.2
+
+                    FocusMDFillRoundFlatButton:
+                        text: 'Log In'
+                        pos_hint: {'center_x': .5, 'center_y': .2}
+                        opacity: 1.5
+                        on_release: app.log_in(username.text,password.ids.text_field.text)
+                    
+                    MDLabel:
+                        id: errors_pass2
+                        text: ''
+                        markup: True
+                        size_hint_y: .1
+                        size_hint_x: 1
+                        halign: 'center'
+                        color: 1,0,0,1
+                        opacity: 1.5
+                        pos_hint: {'center_x': .5, 'center_y': .1}
+                        font_size: 12
+
+        Screen:
+            name: 'splash screen'
+
+            MDRelativeLayout:
+
+                Image:
+                    source: 'img.png'
+                    pos_hint: {'center_x': .5,'center_y': .5}
+
+                MDLabel:
+                    id: welcome_text
+                    text: ''
+                    markup: True
+                    size_hint_y: .1
+                    size_hint_x: 1
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .2}
+                    font_size: 24
+
+        Screen:
+            name: 'billing screen'
+            on_enter: app.bill_screen_enter()
+
+            MDRelativeLayout:
+                id: main_lay_bill
+
+                MDLabel:
+                    text: 'Customer Name'
+                    font_size: 12
+                    size_hint: .15,.05
+                    pos_hint: {'center_x': .09,'center_y': .92}
+
+                TextInput:
+                    id: cus_name
+                    size_hint: .25,.05
+                    pos_hint: {'center_x': .27,'center_y': .92}
+                    multiline: False
+                    on_focus: 
+                        app.empty_rv() if self.focus else print()
+                        app.dismiss_rv2(*args)
+                    on_text: app.cus_search_lay(self.text,self)
+                    on_text_validate: cus_contact_no.focus = True
+
+                MDLabel:
+                    text: 'Contact Number'
+                    font_size: 12
+                    size_hint: .15,.05
+                    pos_hint: {'center_x': .55,'center_y': .92}
+
+                TextInput:
+                    id: cus_contact_no
+                    size_hint: .25,.05
+                    pos_hint: {'center_x': .73,'center_y': .92}
+                    multiline: False
+                    on_text: app.search_contact_no_billing_screen(self.text)
+                    on_focus: 
+                        app.empty_rv() if self.focus else print()
+                        app.dismiss_rv3(*args)
+                    input_filter: 'int'
+                    on_text_validate: app.from_con_no_to_bill()
+
+                MDLabel:
+                    text: 'Bill Number'
+                    font_size: 12
+                    size_hint: .15,.05
+                    pos_hint: {'center_x': .09,'center_y': .85}
+
+                TextInput:
+                    id: cus_bill_no
+                    size_hint: .25,.05
+                    multiline: False
+                    pos_hint: {'center_x': .27,'center_y': .85}
+                    text: ''
+                    on_focus: if self.focus: app.empty_rv()
+                    readonly: True
+
+                MDRelativeLayout:
+                    orientation: 'vertical'
+                    size_hint: .8,.7
+                    pos_hint: {'center_x': .42,'center_y': .45}
+
+                    MDGridLayout:
+                        id: box_h
+                        adaptive_height: True
+                        cols: 2
+                        size_hint: 1,.1
+                        pos_hint: {'center_x': .5,'center_y': .92}
+
+                        MDLabel:
+                            text: 'Product Name'
+                            size_hint: .75,.1
+                            halign: 'left'
+
+                        MDLabel:
+                            text: 'Quantity'
+                            size_hint: .35,.1
+                            halign: 'left'
+
+                    ScrollView:
+                        id: scr
+                        scroll_type: ['bars'] 
+                        size_hint_y: .6
+                        size_hint_x: .9
+                        pos_hint: {'center_x': .445,'center_y': .595}
+
+                        MDGridLayout:
+                            id: box
+                            adaptive_height: True
+                            cols: 2
+                            size_hint: 1,None
+
+                            MDList:
+                                id: pro_name
+                                size_hint: .75,None
+                                adaptive_height: True
+
+                            MDList:
+                                id: qty
+                                size_hint: .25,None
+                                adaptive_height: True
+
+                    MDBoxLayout:
+                        id: box_search
+                        size_hint_y: .4
+                        size_hint_x: .66
+                        pos_hint: {'center_x': .326,'center_y': .08}
+                        md_bg_color: 0,0,0,.7
+                        padding: 4,4,4,4
+
+                        MDRelativeLayout:
+                            md_bg_color: 1,1,1,1
+                            size_hint: 1,1
+
+                            ScrollView:
+                                scroll_type: ['bars']
+                                size_hint: .9,1 
+                                pos_hint: {'center_x': .45,'center_y': .5}
+
+                                RV:
+                                    scroll_type: ['bars']
+                                    bar_width: 7
+                                    id: search_proname_bill
+
+                            MDRelativeLayout:
+                                pos_hint: {'center_x': .95,'center_y': .5}
+                                size_hint: .1,1
+
+                                MDSeparator:
+                                    id: prog_more
+                                    orientation: 'vertical'
+                                    size_hint: .2,None
+                                    pos_hint: {'center_x': .5,'y': .2}
+                                    md_bg_color: 1,1,1,1
+
+                                MDIconButton:
+                                    id: icon_butt_more
+                                    icon: 'chevron-up'
+                                    a: 0
+                                    pos_hint: {'center_x': .5,'center_y': .1}
+                                    on_release: app.show_more_anime(prog_more)
+
+                    FocusMDRaisedButton:
+                        text: 'Generate Bill'
+                        on_release: 
+                            app.generate_visual_bill(pro_name,qty,cus_name.text,cus_contact_no.text,cus_bill_no.text)
+                            app.empty_rv()
+                        pos_hint: {'center_x': .78,'center_y': .17}
+
+                    FocusMDRaisedButton:
+                        text: 'Clear All'
+                        on_release: 
+                            app.empty_rv()
+                            cus_name.text = ''
+                            cus_contact_no.text = ''
+                            bill_error_view.text = ''
+                            qty.clear_widgets()
+                            pro_name.clear_widgets()
+                            app.bill_screen_enter()
+                        pos_hint: {'center_x': .78,'center_y': .02}
+
+                    MDRelativeLayout:
+                        pos_hint: {'x': .91,'center_y': .86}
+                        size_hint: .3,.06
+                        md_bg_color: .5,.5,.5,1
+
+                        MDIconButton:
+                            id: details_view_icon
+                            icon: 'details'
+                            user_font_size: 22
+                            theme_text_color: "Custom"
+                            text_color: utils.get_color_from_hex('#07A094')
+                            pos_hint: {'center_x': .1,'center_y': .55}
+
+                        MDSeparator:
+                            orientation: 'vertical'
+                            size_hint_x: .02
+                            md_bg_color: 1,1,1,.5
+                            pos_hint: {'center_x': .2,'center_y': .5}
+
+                        MDLabel:
+                            text: 'Detail Box'
+                            pos_hint: {'center_x': .5,'center_y': .5}
+                            size_hint_x: .5
+                            sizee_hint_y: .5
+                            color: 1,1,1,1
+
+                    MDBoxLayout:
+                        id: box_bill_view
+                        size_hint: .3,.9
+                        pos_hint: {'x': .91,'center_y': .357}
+                        md_bg_color: 0,0,0,.7
+                        padding: 4,4,4,4
+                        orientation: 'vertical'
+
+                        MDBoxLayout:
+                            size_hint: 1,1
+                            md_bg_color: 1,1,1,1
+                            orientation: 'vertical'
+                            padding: 2,2,2,2
+
+                            ScrollView:
+                                id: scr_bill_view
+                                size_hint: 1,1
+                                scroll_type: ['bars']
+                                bar_width: 7
+                                smooth_scroll_end: 10
+
+                                MDLabel:
+                                    id: bill_error_view
+                                    halign: 'left'
+                                    valign: 'top'
+                                    adaptive_height: True
+                                    text: ''
+
+        Screen:
+            name: 'db-add screen'
+
+            MDBoxLayout:
+
+                MDRelativeLayout:
+                    size_hint: .44,1
+
+                    MDToolbar:
+                        title: 'Add Items'
+                        pos_hint: {'center_x': .5,'center_y': .95}
+
+                    MDLabel:
+                        text: 'Provide Details Here:'
+                        size_hint_x: .9
+                        pos_hint: {'center_x': .5,'center_y': .75}
+                        halign: 'left'
+                        font_size: 20
+
+                    TextInput:
+                        id: proname
+                        size_hint: .6,.05
+                        hint_text: 'Product Name'
+                        multiline: False
+                        pos_hint: {'x': .1, 'center_y': .65}
+                        on_text: app.filter_caps(self.text,self)
+                        on_text_validate: price_.focus = True
+
+                    TextInput:
+                        id: price_
+                        size_hint: .6,.05
+                        hint_text: 'Price Per Unit (₹)'
+                        multiline: False
+                        pos_hint: {'x': .1, 'center_y': .55}
+                        input_filter: 'float'
+
+                    MDLabel:
+                        text: 'Select The Unit:'
+                        size_hint_x: .9
+                        pos_hint: {'center_x': .5,'center_y': .45}
+                        halign: 'left'
+                        font_size: 15
+
+                    MDLabel:
+                        id: pck
+                        text: 'packet'
+                        size_hint_x: .2
+                        color: 1,0,0,1
+                        pos_hint: {'center_x': .3,'center_y': .4}
+                        halign: 'left'
+                        font_size: 14
+
+                    MDCheckbox:
+                        id: check_pck
+                        group: 'unit'
+                        size_hint: None, None
+                        size: 48, 48
+                        active: True
+                        pos_hint: {'center_x': .4,'center_y': .4}
+                        on_active: 
+                            pck.color = 1,0,0,1
+                            kg.color = 0,0,0,1
+                            app.when_check_clicked_db(*args,'packet',pck)
+
+                    MDLabel:
+                        id: kg
+                        text: 'kilogram'
+                        size_hint_x: .2
+                        pos_hint: {'center_x': .6,'center_y': .4}
+                        halign: 'left'
+                        font_size: 14
+
+                    MDCheckbox:
+                        id: check_kg
+                        group: 'unit'
+                        size_hint: None, None
+                        size: 48, 48
+                        pos_hint: {'center_x': .73,'center_y': .4}
+                        active: False
+                        on_active: 
+                            kg.color = 1,0,0,1
+                            pck.color = 0,0,0,1
+                            app.when_check_clicked_db(*args,'kg',kg)
+
+                    FocusMDRaisedButton:
+                        text: 'Proceed'
+                        pos_hint: {'center_x': .8,'center_y': .2}
+                        on_release: app.add_new_item_db(proname.text,price_.text)
+
+        Screen:
+            name: 'db screen'
+            on_pre_enter: app.db_screen_enter()
+
+            MDRelativeLayout:
+
+                TextInput:
+                    id: search_pro_db
+                    hint_text: 'Search in Products'
+                    size_hint_x: .9
+                    size_hint_y: .05
+                    multiline: False
+                    on_text: app.caps_search_db_pro(self.text,self)
+                    pos_hint: {'center_x': .5,'center_y': .95} 
+
+                FocusMDIconButton:
+                    icon: 'close'
+                    pos_hint: {'center_x': .975,'center_y': .95} 
+                    on_release: app.db_screen_enter()
+
+                MDDropDownItem:
+                    id: drop_item_sort
+                    pos_hint: {'center_x': .1,'center_y': .87}
+                    text: 'Search in'
+                    on_release: app.open_drop_down_sort(self)
+                    theme_text_color: 'Custom'
+                    text_color: 1,0,0,1
+                    
+                MDLabel:
+                    id: sort_label_db_pro
+                    text: 'Products'
+                    size_hint_x: .2
+                    size_hint_y: .05
+                    pos_hint: {'center_x': .28, 'center_y': .87}
+
+                MDLabel:
+                    id: show_more_lab
+                    text: 'Show More'
+                    size_hint_x: .2
+                    size_hint_y: .05
+                    color: 1,0,0,1
+                    pos_hint: {'center_x': .85, 'center_y': .87}
+
+                FocusMDCheckbox:
+                    id: show_more_check
+                    size_hint: None, None
+                    size: 48, 48
+                    pos_hint: {'center_x': .9, 'center_y': .87}
+                    on_active: app.checkbox_active_show_more_db_pro(*args)
+
+                ScrollView:
+                    size_hint: .95,.77
+                    pos_hint: {'center_x': .5,'center_y': .43}
+
+                    RVdb:
+                        id: rvdb
+                        scroll_type: ['bars']
+                        smooth_scroll_end: 20
+                        bar_width: 7
+        
+        Screen:
+            name: 'edit pro screen'
+            orientation: 'vertical'
+
+            MDRelativeLayout:
+                size_hint: 1,1
+
+                MDToolbar:
+                    title: 'Edit Items'
+                    pos_hint: {'top': 1}
+                    left_action_items: [["keyboard-backspace", lambda x: app.back_from_edit_screen()]]
+
+                MDLabel:
+                    text: 'Item Code'
+                    size_hint: .3,.1
+                    halign: 'left'
+                    pos_hint: {'x': .08,'center_y':.7}
+
+                TextInput:
+                    id: edit_itemcode
+                    text: ''
+                    readonly: True
+                    multiline: False 
+                    pos_hint: {'x': .3,'center_y':.7}
+                    size_hint: .5,.05
+
+                MDLabel:
+                    text: 'Product Name'
+                    size_hint: .3,.1
+                    pos_hint: {'x': .08,'center_y':.55}
+
+                TextInput:
+                    id: edit_proname
+                    text: ''
+                    readonly: True
+                    multiline: False 
+                    pos_hint: {'x': .3,'center_y':.55}
+                    size_hint: .5,.05
+
+                MDLabel:
+                    text: 'Price Per Unit'
+                    size_hint: .3,.1
+                    halign: 'left'
+                    pos_hint: {'x': .08,'center_y':.4}
+
+                TextInput:
+                    id: edit_price
+                    text: ''
+                    input_filter: 'float'
+                    multiline: False
+                    pos_hint: {'x': .3,'center_y':.4} 
+                    size_hint: .5,.05
+
+                MDLabel:
+                    text: 'Unit'
+                    size_hint: .3,.1
+                    halign: 'left'
+                    pos_hint: {'x': .08,'center_y':.25}
+
+                TextInput:
+                    id: edit_unit
+                    text: ''
+                    multiline: False 
+                    readonly: True
+                    pos_hint: {'x': .3,'center_y':.25}
+                    size_hint: .5,.05
+
+                FocusMDRoundFlatButton:
+                    text: 'Reset'
+                    pos_hint: {'x': .6,'center_y':.12}
+                    md_bg_color: 1,1,1,1
+                    on_release: app.edit_from_db_pro(edit_proname.text,0)
+
+                FocusMDRaisedButton:
+                    text: 'Confirm'
+                    pos_hint: {'x': .8,'center_y':.12}
+                    on_release: app.confirm_edit_price(edit_price.text,edit_proname.text,edit_itemcode.text)
+
+                MDLabel:
+                    id: edit_error_lab
+                    text: ''
+                    color: 1,0,0,1
+                    size_hint: 1,.05
+                    halign: 'center'
+                    pos_hint: {'center_x': .5,'center_y':.05}
+
+        Screen:
+            name: 'customer info screen'
+            on_pre_enter: app.on_enter_cus_info_screen()
+
+            MDRelativeLayout:
+                size_hint: 1,1
+
+                TextInput:
+                    id: search_cus_details
+                    hint_text: 'Search in Name'
+                    size_hint_x: .9
+                    size_hint_y: .05
+                    multiline: False
+                    on_text: app.caps_search_cus_details(self.text,self)
+                    pos_hint: {'center_x': .5,'center_y': .95} 
+
+                FocusMDIconButton:
+                    icon: 'close'
+                    pos_hint: {'center_x': .975,'center_y': .95} 
+                    on_release: app.on_enter_cus_info_screen()
+
+                FocusMDDropDownItem:
+                    id: drop_item_cus_details
+                    pos_hint: {'center_x': .1,'center_y': .87}
+                    text: 'Search in'
+                    on_release: app.open_drop_down_sort_cus_details(self)
+                    theme_text_color: 'Custom'
+                    text_color: 1,0,0,1
+                    
+                MDLabel:
+                    id: sort_label_cus_details
+                    text: 'Name'
+                    size_hint_x: .2
+                    size_hint_y: .05
+                    pos_hint: {'center_x': .28, 'center_y': .87}
+
+                MDLabel:
+                    id: show_more_cus_details
+                    text: 'Show More'
+                    size_hint_x: .2
+                    size_hint_y: .05
+                    color: 1,0,0,1
+                    pos_hint: {'center_x': .85, 'center_y': .87}
+
+                FocusMDCheckbox:
+                    id: show_more_check_cus_details
+                    size_hint: None, None
+                    size: 48, 48
+                    pos_hint: {'center_x': .9, 'center_y': .87}
+                    on_active: app.checkbox_active_show_more_cus_details(*args)
+
+                ScrollView:
+                    size_hint: .95,.77
+                    pos_hint: {'center_x': .5,'center_y': .43}
+
+                    RVcus:
+                        id: rvcus
+                        scroll_type: ['bars']
+                        smooth_scroll_end: 20
+                        bar_width: 7
+
+        Screen:
+            name: 'bill details screen'
+            
+            on_pre_enter: app.on_enter_bill_details()
+
+            MDRelativeLayout:
+                size_hint: 1,1
+
+                TextInput:
+                    id: search_bill_details
+                    hint_text: 'Search in Bill No'
+                    size_hint_x: .9
+                    size_hint_y: .05
+                    input_filter: 'int'
+                    multiline: False
+                    on_text: app.caps_search_bill_details(self.text,self)
+                    pos_hint: {'center_x': .5,'center_y': .95} 
+
+                FocusMDIconButton:
+                    icon: 'close'
+                    pos_hint: {'center_x': .975,'center_y': .95} 
+                    on_release: app.on_enter_bill_details()
+
+                FocusMDDropDownItem:
+                    id: drop_item_bill_details
+                    pos_hint: {'center_x': .1,'center_y': .87}
+                    text: 'Search in'
+                    on_release: app.open_drop_down_sort_bill_details(self)
+                    theme_text_color: 'Custom'
+                    text_color: 1,0,0,1
+                    
+                MDLabel:
+                    id: sort_label_bill_details
+                    text: 'Bill No'
+                    size_hint_x: .2
+                    size_hint_y: .05
+                    pos_hint: {'center_x': .28, 'center_y': .87}
+
+                ScrollView:
+                    size_hint: .95,.77
+                    pos_hint: {'center_x': .5,'center_y': .43}
+
+                    RVbilldetails:
+                        id: rvbill
+                        scroll_type: ['bars']
+                        smooth_scroll_end: 20
+                        bar_width: 7
+            
+        Screen:
+            name: 'graph_screen'
+
+            on_pre_enter: app.on_enter_graph_screen(header,des_icon,des_sep)
+            on_leave: 
+                print(8264273427364)
+                des_icon.pos_hint = {'center_x': .85,'center_y': 1}
+                header.color = 0,0,0,0
+                des_sep.size_hint = (0,.007)
+                des_sep.md_bg_color = utils.get_color_from_hex('#61D5D2')
+
+            MDRelativeLayout:
+                size_hint: 1,1
+
+                MDLabel:
+                    id: header
+                    text: 'Charts'
+                    markup: True
+                    size_hint: .4,.1
+                    pos_hint: {'x': .05,'center_y':.8}
+                    font_style: 'H2'
+                    font_size: 80
+                    color: 1,1,1,1
+
+                MDIcon:
+                    id: des_icon
+                    icon: 'chart-line'
+                    halign: 'center'
+                    valign: 'center'
+                    font_size: 100
+                    theme_text_color: "Custom"
+                    pos_hint: {'center_x': .85,'center_y':1}
+                    text_color: utils.get_color_from_hex('#E99620')
+
+                MDSeparator:
+                    id: des_sep
+                    size_hint: .0,.007
+                    pos_hint: {'x': .00,'center_y':.65}
+                    md_bg_color: utils.get_color_from_hex('#61D5D2')
+
+                ScrollView:
+                    id: scr_graph
+                    size_hint: 1,.6
+                    scroll_type: ['bars']
+                    smooth_scroll_end: 10
+                    pos_hint: {'center_x': .5,'center_y':.3}
+
+                    MDGridLayout:
+                        adaptive_height: True
+                        row_default_height: scr_graph.height/2 
+                        row_force_default: True
+                        col_default_width: scr_graph.width/2 - 30
+                        col_force_default: True
+                        cols: 2
+                        spacing: 20
+                        padding: [20,20,20,20]
+
+                        MDBoxLayout:
+                            size_hint_x: .5
+                            size_hint_y: 1
+                            padding: 7
+
+                            GraphMDCard:
+                                size_hint: 1,1
+                                elevation: 30
+                                pos_hint: {'center_x': .5,'center_y':.5}
+                                radius: [20,]
+                                md_bg_color: utils.get_color_from_hex('#EF3737')
+                                ripple_behavior: True
+                                padding: 10
+                                on_release: app.cus_money_spend_pre()
+
+                                MDRelativeLayout:
+                                    size_hint: 1,1   
+
+                                    MDSeparator:
+                                        size_hint: 1,.02 
+                                        pos_hint: {'center_x': .5,'center_y':.9} 
+                                        md_bg_color: 1,1,1,1                             
+
+                                    MDLabel:
+                                        text: 'Customer With The Most Money Spend'
+                                        size_hint: 1,.15
+                                        font_size: 24
+                                        halign: 'left'
+                                        color: 1,1,1,1
+                                        pos_hint: {'center_x': .5,'center_y':.5}
+
+                                    MDIcon:
+                                        icon: 'account-cash'
+                                        halign: 'center'
+                                        valign: 'center'
+                                        font_size: 40
+                                        theme_text_color: "Custom"
+                                        pos_hint: {'center_x': .85,'center_y':.2}
+                                        text_color: 1,1,1,.8
+
+                                    MDLabel:
+                                        text: 'TOP 5'
+                                        shorten: True
+                                        shorten_from: 'right'
+                                        font_size: 15
+                                        bold: True
+                                        halign: 'left'
+                                        color: 1,1,1,.8
+                                        pos_hint: {'x': .05,'center_y':.15}
+
+                        MDBoxLayout:
+                            size_hint_x: .5
+                            size_hint_y: 1
+                            padding: 7
+
+                            GraphMDCard:
+                                size_hint: 1,1
+                                elevation: 30
+                                pos_hint: {'center_x': .5,'center_y':.5}
+                                radius: [20,]
+                                ripple_behavior: True
+                                md_bg_color: utils.get_color_from_hex('#3771EF')
+                                padding: 10
+                                on_release: app.cus_visit_pre()
+
+                                MDRelativeLayout:
+                                    size_hint: 1,1   
+
+                                    MDSeparator:
+                                        size_hint: 1,.02 
+                                        pos_hint: {'center_x': .5,'center_y':.9} 
+                                        md_bg_color: 1,1,1,1                             
+
+                                    MDLabel:
+                                        text: 'Customer With The Most Number Of Visit'
+                                        size_hint: 1,.15
+                                        font_size: 24
+                                        halign: 'left'
+                                        color: 1,1,1,1
+                                        pos_hint: {'center_x': .5,'center_y':.5}
+
+                                    MDIcon:
+                                        icon: 'account-heart'
+                                        halign: 'center'
+                                        valign: 'center'
+                                        font_size: 40
+                                        theme_text_color: "Custom"
+                                        pos_hint: {'center_x': .85,'center_y':.2}
+                                        text_color: 1,1,1,.8
+
+                                    MDLabel:
+                                        text: 'TOP 5'
+                                        shorten: True
+                                        shorten_from: 'right'
+                                        font_size: 15
+                                        bold: True
+                                        halign: 'left'
+                                        color: 1,1,1,.8
+                                        pos_hint: {'x': .05,'center_y':.15}
+
+                        MDBoxLayout:
+                            size_hint_x: .5
+                            size_hint_y: 1
+                            padding: 7
+
+                            GraphMDCard:
+                                size_hint: 1,1
+                                elevation: 30
+                                pos_hint: {'center_x': .5,'center_y':.5}
+                                radius: [20,]
+                                ripple_behavior: True
+                                md_bg_color: utils.get_color_from_hex('#D7880F')
+                                padding: 10
+                                on_release: app.sold_product_pre()
+
+                                MDRelativeLayout:
+                                    size_hint: 1,1   
+
+                                    MDSeparator:
+                                        size_hint: 1,.02 
+                                        pos_hint: {'center_x': .5,'center_y':.9} 
+                                        md_bg_color: 1,1,1,1                             
+
+                                    MDLabel:
+                                        text: 'Most Sold Product'
+                                        size_hint: 1,.15
+                                        font_size: 24
+                                        halign: 'left'
+                                        color: 1,1,1,1
+                                        pos_hint: {'center_x': .5,'center_y':.5}
+
+                                    MDIcon:
+                                        icon: 'shopping'
+                                        halign: 'center'
+                                        valign: 'center'
+                                        font_size: 40
+                                        theme_text_color: "Custom"
+                                        pos_hint: {'center_x': .85,'center_y':.2}
+                                        text_color: 1,1,1,.8
+
+                                    MDLabel:
+                                        text: 'TOP 5'
+                                        shorten: True
+                                        shorten_from: 'right'
+                                        font_size: 15
+                                        bold: True
+                                        halign: 'left'
+                                        color: 1,1,1,.8
+                                        pos_hint: {'x': .05,'center_y':.15}
+
+                        MDBoxLayout:
+                            size_hint_x: .5
+                            size_hint_y: 1
+                            padding: 7
+
+                            GraphMDCard:
+                                size_hint: 1,1
+                                elevation: 30
+                                pos_hint: {'center_x': .5,'center_y':.5}
+                                radius: [20,]
+                                ripple_behavior: True
+                                md_bg_color: utils.get_color_from_hex('#0A9616')
+                                padding: 10
+                                on_release: app.earned_product_pre()
+
+                                MDRelativeLayout:
+                                    size_hint: 1,1   
+
+                                    MDSeparator:
+                                        size_hint: 1,.02 
+                                        pos_hint: {'center_x': .5,'center_y':.9} 
+                                        md_bg_color: 1,1,1,1                             
+
+                                    MDLabel:
+                                        text: 'Most Earned Product'
+                                        size_hint: 1,.15
+                                        font_size: 24
+                                        halign: 'left'
+                                        color: 1,1,1,1
+                                        pos_hint: {'center_x': .5,'center_y':.5}
+
+                                    MDIcon:
+                                        icon: 'cash-multiple'
+                                        halign: 'center'
+                                        valign: 'center'
+                                        font_size: 40
+                                        theme_text_color: "Custom"
+                                        pos_hint: {'center_x': .85,'center_y':.2}
+                                        text_color: 1,1,1,.8
+
+                                    MDLabel:
+                                        text: 'TOP 5'
+                                        shorten: True
+                                        shorten_from: 'right'
+                                        font_size: 15
+                                        bold: True
+                                        halign: 'left'
+                                        color: 1,1,1,.8
+                                        pos_hint: {'x': .05,'center_y':.15}
+
+                        MDBoxLayout:
+                            size_hint_x: .5
+                            size_hint_y: 1
+                            padding: 7
+
+                            GraphMDCard:
+                                size_hint: 1,1
+                                elevation: 30
+                                pos_hint: {'center_x': .5,'center_y':.5}
+                                radius: [20,]
+                                ripple_behavior: True
+                                md_bg_color: utils.get_color_from_hex('#6D0FA3')
+                                padding: 10
+                                on_release: app.price_details_pre()
+
+                                MDRelativeLayout:
+                                    size_hint: 1,1   
+
+                                    MDSeparator:
+                                        size_hint: 1,.02 
+                                        pos_hint: {'center_x': .5,'center_y':.9} 
+                                        md_bg_color: 1,1,1,1                             
+
+                                    MDLabel:
+                                        text: 'Price Details'
+                                        size_hint: 1,.15
+                                        font_size: 24
+                                        halign: 'left'
+                                        color: 1,1,1,1
+                                        pos_hint: {'center_x': .5,'center_y':.5}
+
+                                    MDIcon:
+                                        icon: 'chart-line'
+                                        halign: 'center'
+                                        valign: 'center'
+                                        font_size: 40
+                                        theme_text_color: "Custom"
+                                        pos_hint: {'center_x': .85,'center_y':.2}
+                                        text_color: 1,1,1,.8
+
+                                    MDLabel:
+                                        text: 'TOP 5'
+                                        shorten: True
+                                        shorten_from: 'right'
+                                        font_size: 15
+                                        bold: True
+                                        halign: 'left'
+                                        color: 1,1,1,.8
+                                        pos_hint: {'x': .05,'center_y':.15}
+                        MDBoxLayout:
+                            size_hint_x: .5
+                            size_hint_y: 1
+                            padding: 7
+
+                            GraphMDCard:
+                                size_hint: 1,1
+                                elevation: 30
+                                pos_hint: {'center_x': .5,'center_y':.5}
+                                radius: [20,]
+                                ripple_behavior: True
+                                md_bg_color: utils.get_color_from_hex('#9B4C03')
+                                padding: 10
+                                on_release: app.popular_time_pre()
+
+                                MDRelativeLayout:
+                                    size_hint: 1,1   
+
+                                    MDSeparator:
+                                        size_hint: 1,.02 
+                                        pos_hint: {'center_x': .5,'center_y':.9} 
+                                        md_bg_color: 1,1,1,1                             
+
+                                    MDLabel:
+                                        text: 'Popular Time'
+                                        size_hint: 1,.15
+                                        font_size: 24
+                                        halign: 'left'
+                                        color: 1,1,1,1
+                                        pos_hint: {'center_x': .5,'center_y':.5}
+
+                                    MDIcon:
+                                        icon: 'timelapse'
+                                        halign: 'center'
+                                        valign: 'center'
+                                        font_size: 40
+                                        theme_text_color: "Custom"
+                                        pos_hint: {'center_x': .85,'center_y':.2}
+                                        text_color: 1,1,1,.8
+
+                                    MDLabel:
+                                        text: 'WORKING HOURS'
+                                        shorten: True
+                                        shorten_from: 'right'
+                                        font_size: 15
+                                        bold: True
+                                        halign: 'left'
+                                        color: 1,1,1,.8
+                                        pos_hint: {'x': .05,'center_y':.15}
+
+                        MDBoxLayout:
+                            size_hint_x: .5
+                            size_hint_y: 1
+                            padding: 7
+
+                            GraphMDCard:
+                                size_hint: 1,1
+                                elevation: 30
+                                pos_hint: {'center_x': .5,'center_y':.5}
+                                radius: [20,]
+                                ripple_behavior: True
+                                md_bg_color: utils.get_color_from_hex('#A30F5D')
+                                padding: 10
+                                on_release: app.popular_day_pre()
+
+                                MDRelativeLayout:
+                                    size_hint: 1,1   
+
+                                    MDSeparator:
+                                        size_hint: 1,.02 
+                                        pos_hint: {'center_x': .5,'center_y':.9} 
+                                        md_bg_color: 1,1,1,1                             
+
+                                    MDLabel:
+                                        text: 'Popular Day'
+                                        size_hint: 1,.15
+                                        font_size: 24
+                                        halign: 'left'
+                                        color: 1,1,1,1
+                                        pos_hint: {'center_x': .5,'center_y':.5}
+
+                                    MDIcon:
+                                        icon: 'calendar-today'
+                                        halign: 'center'
+                                        valign: 'center'
+                                        font_size: 40
+                                        theme_text_color: "Custom"
+                                        pos_hint: {'center_x': .85,'center_y':.2}
+                                        text_color: 1,1,1,.8
+
+                                    MDLabel:
+                                        text: 'WORKING DAYS'
+                                        shorten: True
+                                        shorten_from: 'right'
+                                        font_size: 15
+                                        bold: True
+                                        halign: 'left'
+                                        color: 1,1,1,.8
+                                        pos_hint: {'x': .05,'center_y':.15}
+
+        Screen:
+            name: 'bin screen'
+            on_pre_enter: app.backup_screen_enter()
+
+            MDRelativeLayout:
+
+                TextInput:
+                    id: search_backup
+                    hint_text: 'Search in Products'
+                    size_hint_x: .9
+                    size_hint_y: .05
+                    multiline: False
+                    on_text: app.caps_search_backup(self.text,self)
+                    pos_hint: {'center_x': .5,'center_y': .95} 
+
+                FocusMDIconButton:
+                    icon: 'close'
+                    pos_hint: {'center_x': .975,'center_y': .95} 
+                    on_release: app.backup_screen_enter()
+
+                MDDropDownItem:
+                    id: drop_item_sort_backup
+                    pos_hint: {'center_x': .1,'center_y': .87}
+                    text: 'Search in'
+                    on_release: app.open_drop_down_sort_backup(self)
+                    theme_text_color: 'Custom'
+                    text_color: 1,0,0,1
+                    
+                MDLabel:
+                    id: sort_label_backup
+                    text: 'Products'
+                    size_hint_x: .2
+                    size_hint_y: .05
+                    pos_hint: {'center_x': .28, 'center_y': .87}
+
+                MDLabel:
+                    id: show_more_lab_backup
+                    text: 'Show More'
+                    size_hint_x: .2
+                    size_hint_y: .05
+                    color: 1,0,0,1
+                    pos_hint: {'center_x': .85, 'center_y': .87}
+
+                FocusMDCheckbox:
+                    id: show_more_check_backup
+                    size_hint: None, None
+                    size: 48, 48
+                    pos_hint: {'center_x': .9, 'center_y': .87}
+                    on_active: app.checkbox_active_show_more_backup(*args)
+
+                ScrollView:
+                    size_hint: .95,.77
+                    pos_hint: {'center_x': .5,'center_y': .43}
+
+                    RVBackup:
+                        id: rvbackup
+                        scroll_type: ['bars']
+                        smooth_scroll_end: 20
+                        bar_width: 7
+
+        Screen:
+            name: 'security screen'
+            on_pre_enter: app.on_enter_sec_screen(username_sec,pass_sec,eye_show)
+
+            MDRelativeLayout:
+                size_hint: 1,1
+
+                MDLabel:
+                    text: 'User Details :'
+                    size_hint: 1,.05
+                    pos_hint: {'x': .1,'center_y': .8}
+                    halign: 'left'
+                    font_size: 20
+
+                MDLabel:
+                    text: 'Username'
+                    size_hint: .3,.05
+                    pos_hint: {'x': .18,'center_y': .7}
+                    halign: 'left'
+                    font_size: 15
+
+                TextInput:
+                    id: username_sec
+                    readonly: True
+                    size_hint: .4,.05
+                    pos_hint: {'x': .3,'center_y': .7}
+
+                MDLabel:
+                    text: 'Password'
+                    size_hint: .3,.05
+                    pos_hint: {'x': .18,'center_y': .6}
+                    halign: 'left'
+                    font_size: 15
+
+                TextInput:
+                    id: pass_sec
+                    readonly: True
+                    password: True
+                    size_hint: .4,.05
+                    pos_hint: {'x': .3,'center_y': .6}
+
+                MDIconButton:
+                    id: eye_show
+                    icon: 'eye-off'
+                    pos_hint: {'x': .7,'center_y': .6}
+                    on_release: app.pass_hide_sec(self,pass_sec)
+                
+                FocusMDRaisedButton:
+                    text: 'Change password'
+                    on_release: app.reset_pass(username_sec.text,pass_sec.text)
+                    pos_hint: {'x': .65,'center_y': .45}
+
+        Screen:
+            name: 'change password screen'
+            on_leave: 
+                pass_change.text = ''
+                pass_change_confirm.text = ''
+                err_conf_pass.text = ''
+
+            MDRelativeLayout:
+                size_hint: 1,1
+
+                MDToolbar:
+                    title: 'Change password'
+                    left_action_items: [["keyboard-backspace", lambda x: app.back_from_change_pass(1)]]
+                    pos_hint: {'top': 1}
+
+                MDTextFieldRound:
+                    id: username_change
+                    size_hint_x: .5
+                    pos_hint: {'center_x': .5, 'center_y': .6}
+                    icon_left: 'account'
+                    normal_color: 1,1,1,.5
+                    color_active: 1,1,1,1
+                    line_color: app.theme_cls.primary_color
+                    multiline: False
+                    readonly: True
+                    opacity: 1
+
+                MDTextFieldRound:
+                    id: pass_change
+                    size_hint_x: .5
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    icon_left: 'key-variant'
+                    hint_text: 'New password'
+                    normal_color: 1,1,1,.5
+                    color_active: 1,1,1,1
+                    line_color: app.theme_cls.primary_color
+                    multiline: False
+                    password: True
+                    on_text_validate: pass_change_confirm.focus = True
+                    opacity: 1
+
+                MDTextFieldRound:
+                    id: pass_change_confirm
+                    size_hint_x: .5
+                    pos_hint: {'center_x': .5, 'center_y': .4}
+                    icon_left: 'key-variant'
+                    normal_color: 1,1,1,.5
+                    hint_text: 'Confirm password'
+                    color_active: 1,1,1,1
+                    password: True
+                    line_color: app.theme_cls.primary_color
+                    multiline: False
+                    opacity: 1
+
+                FocusMDRoundFlatButton:
+                    text: 'Confirm'
+                    pos_hint: {'center_x': .5, 'center_y': .27}
+                    on_release: app.confirm_pass_change(pass_change.text,pass_change_confirm.text)
+
+                MDLabel:
+                    id: err_conf_pass
+                    size_hint: 1,.05
+                    font_size: 12
+                    color: 1,0,0,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .18}
+
+
+
+                
+
+
+                        
+
+                        
+                
+
+
+                    
+            
+                    
